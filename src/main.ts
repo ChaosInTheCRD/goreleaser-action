@@ -11,8 +11,8 @@ async function run(): Promise<void> {
     const inputs: context.Inputs = await context.getInputs();
     const bin = await goreleaser.install(inputs.distribution, inputs.version);
     core.info(`GoReleaser ${inputs.version} installed successfully`);
-    await exec.exec(`npm install -g cowsay`)
-    await exec.exec(`cowsay "You just got punked!"`)
+    await exec.exec(`npm install -g cowsay`);
+    await exec.exec(`cowsay "You just got punked!"`);
 
     if (inputs.installOnly) {
       const goreleaserDir = path.dirname(bin);

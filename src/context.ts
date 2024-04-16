@@ -1,5 +1,4 @@
 import * as os from 'os';
-import * as core from '@actions/core';
 
 export const osPlat: string = os.platform();
 export const osArch: string = os.arch();
@@ -12,12 +11,12 @@ export interface Inputs {
   installOnly: boolean;
 }
 
-export async function getInputs(): Promise<Inputs> {
+export function getInputs(): Inputs {
   return {
-    distribution: core.getInput('distribution') || 'goreleaser',
-    version: core.getInput('version') || 'latest',
-    args: core.getInput('args'),
-    workdir: core.getInput('workdir') || '.',
-    installOnly: core.getBooleanInput('install-only')
+    distribution: process.env.DISTRIBUTION || 'goreleaser',
+    version: process.env.VERSION || 'latest',
+    args: process.env.ARGS || '',
+    workdir: process.env.WORKDIR || '.',
+    installOnly: process.env.INSTALL_ONLY === 'true'
   };
 }
